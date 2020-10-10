@@ -33,10 +33,10 @@ public class GameActivity extends AppCompatActivity {
 
     private void placeSpinners() {
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
-        String[] strings={"1","2","3"};
+        String[] colors = game.getColorsArray();
         for (int i = 0; i < game.getNbrColorCombination(); i++) {
             Spinner spinner = new Spinner(this);
-            spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, strings));
+            spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, colors));
             linearLayout.addView(spinner);
         }
     }

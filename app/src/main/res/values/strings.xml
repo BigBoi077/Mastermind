@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Mastermind</string>
-    <string name="menu_welcome">Bienvenue à Mastermind!</string>
-    <string name="chose_difficulty">Choisissez votre difficulté:</string>
-    <string name="classic_difficulty">Classique</string>
-    <string name="hard_difficulty">Difficile</string>
-    <string name="button_start">Débuter</string>
+    <string name="menu_welcome">Welcome to Mastermind!</string>
+    <string name="chose_difficulty">Chose your difficulty:</string>
+    <string name="classic_difficulty">Classic</string>
+    <string name="hard_difficulty">Difficult</string>
+    <string name="button_start">Start Game</string>
     <string-array name="colors">
         <item>Black</item>
         <item>White</item>

@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 public class Game implements Parcelable {
 
+    private int MAX_ATTEMPTS = 12;
     private String[] colorsArray;
     private String[] randomColorArray;
     private String difficulty;
@@ -19,6 +20,7 @@ public class Game implements Parcelable {
     }
 
     protected Game(Parcel in) {
+        MAX_ATTEMPTS = in.readInt();
         colorsArray = in.createStringArray();
         randomColorArray = in.createStringArray();
         difficulty = in.readString();
@@ -26,8 +28,12 @@ public class Game implements Parcelable {
         nbrAttempts = in.readInt();
     }
 
+    public boolean isMaxedAttempts() {
+        return nbrAttempts < MAX_ATTEMPTS;
+    }
+
     public void setCombinationsByDifficulty() {
-        if (difficulty.equals("Classique")) {
+        if (difficulty.equals("Classic")) {
             this.nbrColorCombination = 4;
         } else {
             this.nbrColorCombination = 5;
@@ -98,6 +104,7 @@ public class Game implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(MAX_ATTEMPTS);
         parcel.writeStringArray(colorsArray);
         parcel.writeStringArray(randomColorArray);
         parcel.writeString(difficulty);
