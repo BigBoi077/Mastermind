@@ -15,4 +15,13 @@
 
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/ic_baseline_add_circle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
