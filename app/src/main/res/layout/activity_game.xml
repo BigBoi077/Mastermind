@@ -19,12 +19,12 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:onClick="sendResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_circle" />
+        app:srcCompat="@drawable/ic_baseline_add_circle"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

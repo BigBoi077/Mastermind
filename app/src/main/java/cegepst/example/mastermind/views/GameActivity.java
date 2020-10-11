@@ -3,41 +3,41 @@ package cegepst.example.mastermind.views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import cegepst.example.mastermind.R;
-import cegepst.example.mastermind.models.Game;
+import cegepst.example.mastermind.models.MastermindGame;
 
 public class GameActivity extends AppCompatActivity {
 
-    private Game game;
+    private MastermindGame mastermindGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getIntent().hasExtra("game")) {
-            game = getIntent().getParcelableExtra("game");
+            mastermindGame = getIntent().getParcelableExtra("game");
         }
-        game.generateRandomColorArray();
+        mastermindGame.generateRandomColorArray();
         setContentView(R.layout.activity_game);
         placeSpinners();
     }
 
     private void placeSpinners() {
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
-        String[] colors = game.getColorsArray();
-        for (int i = 0; i < game.getNbrColorCombination(); i++) {
+        String[] colors = mastermindGame.getColorsArray();
+        for (int i = 0; i < mastermindGame.getNbrColorCombination(); i++) {
             Spinner spinner = new Spinner(this);
             spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, colors));
+            spinner.setId(i);
             linearLayout.addView(spinner);
         }
+    }
+
+    public void sendResults(View view) {
+        mastermindGame
     }
 }

@@ -3,7 +3,7 @@ package cegepst.example.mastermind.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Game implements Parcelable {
+public class MastermindGame implements Parcelable {
 
     private int MAX_ATTEMPTS = 12;
     private String[] colorsArray;
@@ -12,14 +12,14 @@ public class Game implements Parcelable {
     private int nbrColorCombination;
     private int nbrAttempts;
 
-    public Game() {
+    public MastermindGame() {
         difficulty = "";
         nbrColorCombination = 0;
         nbrAttempts = 0;
         colorsArray = new String[]{"B", "W", "Y", "R", "BL", "G"};
     }
 
-    protected Game(Parcel in) {
+    protected MastermindGame(Parcel in) {
         MAX_ATTEMPTS = in.readInt();
         colorsArray = in.createStringArray();
         randomColorArray = in.createStringArray();
@@ -85,15 +85,15 @@ public class Game implements Parcelable {
         this.difficulty = difficulty;
     }
 
-    public static final Creator<Game> CREATOR = new Creator<Game>() {
+    public static final Creator<MastermindGame> CREATOR = new Creator<MastermindGame>() {
         @Override
-        public Game createFromParcel(Parcel in) {
-            return new Game(in);
+        public MastermindGame createFromParcel(Parcel in) {
+            return new MastermindGame(in);
         }
 
         @Override
-        public Game[] newArray(int size) {
-            return new Game[size];
+        public MastermindGame[] newArray(int size) {
+            return new MastermindGame[size];
         }
     };
 
