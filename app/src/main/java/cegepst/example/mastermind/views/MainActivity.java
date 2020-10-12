@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startGame(View view) {
         if (mastermindGame.getDifficulty().equals("")) {
-            Toast.makeText(this, "Please select a difficulty before preceding", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.select_difficulty_error, Toast.LENGTH_SHORT).show();
         } else {
             Intent gameIntent = new Intent(this , GameActivity.class);
             mastermindGame.setCombinationsByDifficulty();

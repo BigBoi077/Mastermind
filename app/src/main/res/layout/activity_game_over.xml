@@ -6,4 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".views.GameOverActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/ic_game_over"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
+            android:layout_height="1dp"
+            android:background="@color/colorAccentPink"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:text="@string/game_over_message"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
+            android:layout_height="1dp"
+            android:background="@color/colorAccentPink"/>
+
+        <Button
+            android:onClick="startOver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorAccentPale"
+            android:text="@string/start_over_button" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

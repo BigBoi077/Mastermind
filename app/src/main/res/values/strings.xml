@@ -4,7 +4,11 @@
     <string name="chose_difficulty">Chose your difficulty:</string>
     <string name="classic_difficulty">Classic</string>
     <string name="hard_difficulty">Difficult</string>
+    <string name="select_difficulty_error">Please select a difficulty before preceding.</string>
     <string name="button_start">Start Game</string>
+    <string name="game_over_message">Oh no… you didn\'t get the right combination in 12 turns… Better luck next time!</string>
+    <string name="start_over_button">Start over</string>
+    <string name="winner_message">Congratulation you\'ve won the Mastermind game! To start a new game press the button below.</string>
     <string-array name="colors">
         <item>Black</item>
         <item>White</item>
