@@ -9,6 +9,7 @@
     <string name="game_over_message">Oh no… you didn\'t get the right combination in 12 turns… Better luck next time!</string>
     <string name="start_over_button">Start over</string>
     <string name="winner_message">Congratulation you\'ve won the Mastermind game! To start a new game press the button below.</string>
+    <string name="try_combination">Try combinaiton</string>
     <string-array name="colors">
         <item>Black</item>
         <item>White</item>
