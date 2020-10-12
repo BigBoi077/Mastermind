@@ -3,6 +3,7 @@ package cegepst.example.mastermind.views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -82,6 +83,7 @@ public class GameActivity extends AppCompatActivity {
     public String[] setColorCombination() {
         String playerColorCombination = "";
         String[] playerColorArray = new String[mastermindGame.getNbrColorCombination()];
+
         playerColorCombination += getSpinnerText(R.id.spinner1);
         playerColorArray[0] = getSpinnerText(R.id.spinner1);
 
@@ -98,6 +100,9 @@ public class GameActivity extends AppCompatActivity {
             playerColorCombination += getSpinnerText(R.id.spinner4);
             playerColorArray[4] =  getSpinnerText(R.id.spinner4);
         }
+
+        Log.d("salut jeremy", "Allo");
+
         mastermindGame.setPlayerColorCombination(playerColorCombination);
         return playerColorArray;
     }
