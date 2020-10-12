@@ -2,8 +2,8 @@ package cegepst.example.mastermind.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -31,17 +31,18 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void placeSpinners() {
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        LinearLayout linearLayout = findViewById(R.id.linearLayout);
         String[] colors = mastermindGame.getColorsArray();
         for (int i = 0; i < mastermindGame.getNbrColorCombination(); i++) {
             Spinner spinner = new Spinner(this);
             spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, colors));
 
-            RelativeLayout.LayoutParams spinnerSize = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT,
-                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+           RelativeLayout.LayoutParams spinnerSize = new RelativeLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
 
             spinner.setLayoutParams(spinnerSize);
+            spinner.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             spinner.setSelection(Random.getRandomNumber(0, 6));
             switch (i) {
                 case 0:
@@ -74,48 +75,60 @@ public class GameActivity extends AppCompatActivity {
 
     public void sendResults(View view) {
         String[] playerColorArray = setColorCombination();
-        isWinner(playerColorArray);
+        if (isWinner(playerColorArray)) {
+            Intent intent = new Intent(this, VictoryActivity.class);
+            startActivity(intent);
+        }
+        mastermindGame.setNbrAttempts(mastermindGame.getNbrAttempts() + 1);
+        if (mastermindGame.isMaxedAttempts()) {
+            Intent intent = new Intent(this, GameOverActivity.class);
+            startActivity(intent);
+        }
     }
 
-    private void isWinner(String[] playerColorArray) {
+    private boolean isWinner(String[] playerColorArray) {
+        String[] correctAnswerArray = mastermindGame.getRandomColorArray();
+        int arrayLength = mastermindGame.getRandomColorArray().length;
+        int wantedCorrectAnswers = mastermindGame.getNbrColorCombination();
+        int nbrCorrectAnswers = 0;
+        for (int i = 0; i < arrayLength; i++) {
+            if (playerColorArray[i].equals(correctAnswerArray[i])) {
+                nbrCorrectAnswers++;
+            }
+            if (nbrCorrectAnswers == wantedCorrectAnswers) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private String getSpinnerText(int resId) {
+        Spinner spinner = findViewById(resId);
+        return spinner.getSelectedItem().toString();
     }
 
     public String[] setColorCombination() {
         String playerColorCombination = "";
         String[] playerColorArray = new String[mastermindGame.getNbrColorCombination()];
 
-        playerColorCombination += getSpinnerText(R.id.spinner1);
+        playerColorCombination += " " + getSpinnerText(R.id.spinner1);
         playerColorArray[0] = getSpinnerText(R.id.spinner1);
 
-        playerColorCombination += getSpinnerText(R.id.spinner);
+        playerColorCombination += " " + getSpinnerText(R.id.spinner);
         playerColorArray[1] = getSpinnerText(R.id.spinner);
 
-        playerColorCombination += getSpinnerText(R.id.spinner2);
+        playerColorCombination += " " + getSpinnerText(R.id.spinner2);
         playerColorArray[2] =  getSpinnerText(R.id.spinner2);
 
-        playerColorCombination += getSpinnerText(R.id.spinner3);
+        playerColorCombination += " " + getSpinnerText(R.id.spinner3);
         playerColorArray[3] =  getSpinnerText(R.id.spinner3);
 
         if (mastermindGame.getDifficulty().equals("Difficult")) {
-            playerColorCombination += getSpinnerText(R.id.spinner4);
+            playerColorCombination += " " + getSpinnerText(R.id.spinner4);
             playerColorArray[4] =  getSpinnerText(R.id.spinner4);
         }
 
-        Log.d("salut jeremy", "Allo");
-
         mastermindGame.setPlayerColorCombination(playerColorCombination);
         return playerColorArray;
-    }
-
-    private String getSpinnerText(int resId) {
-        Spinner spinner = (Spinner)findViewById(resId);
-        String text = "";
-        try {
-            text = spinner.getSelectedItem().toString();
-            return text;
-        } catch (Exception e) {
-            Toast.makeText(this, "Please select a color before submiting", Toast.LENGTH_SHORT).show();
-        }
-        return text;
     }
 }

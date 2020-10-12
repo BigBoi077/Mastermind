@@ -31,7 +31,7 @@ public class MastermindGame implements Parcelable {
     }
 
     public boolean isMaxedAttempts() {
-        return nbrAttempts < MAX_ATTEMPTS;
+        return nbrAttempts >= MAX_ATTEMPTS;
     }
 
     public void setCombinationsByDifficulty() {
