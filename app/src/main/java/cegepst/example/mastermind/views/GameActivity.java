@@ -2,7 +2,6 @@ package cegepst.example.mastermind.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -73,20 +72,34 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void sendResults(View view) {
-        setColorCombination();
-
+        String[] playerColorArray = setColorCombination();
+        isWinner(playerColorArray);
     }
 
-    public void setColorCombination() {
+    private void isWinner(String[] playerColorArray) {
+    }
+
+    public String[] setColorCombination() {
         String playerColorCombination = "";
+        String[] playerColorArray = new String[mastermindGame.getNbrColorCombination()];
         playerColorCombination += getSpinnerText(R.id.spinner1);
+        playerColorArray[0] = getSpinnerText(R.id.spinner1);
+
         playerColorCombination += getSpinnerText(R.id.spinner);
+        playerColorArray[1] = getSpinnerText(R.id.spinner);
+
         playerColorCombination += getSpinnerText(R.id.spinner2);
+        playerColorArray[2] =  getSpinnerText(R.id.spinner2);
+
         playerColorCombination += getSpinnerText(R.id.spinner3);
+        playerColorArray[3] =  getSpinnerText(R.id.spinner3);
+
         if (mastermindGame.getDifficulty().equals("Difficult")) {
             playerColorCombination += getSpinnerText(R.id.spinner4);
+            playerColorArray[4] =  getSpinnerText(R.id.spinner4);
         }
         mastermindGame.setPlayerColorCombination(playerColorCombination);
+        return playerColorArray;
     }
 
     private String getSpinnerText(int resId) {
