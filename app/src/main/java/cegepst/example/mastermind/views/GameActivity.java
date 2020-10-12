@@ -4,11 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -37,6 +36,12 @@ public class GameActivity extends AppCompatActivity {
         for (int i = 0; i < mastermindGame.getNbrColorCombination(); i++) {
             Spinner spinner = new Spinner(this);
             spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, colors));
+
+            RelativeLayout.LayoutParams spinnerSize = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+            spinner.setLayoutParams(spinnerSize);
             spinner.setSelection(Random.getRandomNumber(0, 6));
             switch (i) {
                 case 0:
