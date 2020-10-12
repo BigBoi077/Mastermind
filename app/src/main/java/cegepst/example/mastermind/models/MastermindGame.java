@@ -9,6 +9,7 @@ public class MastermindGame implements Parcelable {
     private String[] colorsArray;
     private String[] randomColorArray;
     private String difficulty;
+    private String playerColorCombination;
     private int nbrColorCombination;
     private int nbrAttempts;
 
@@ -24,6 +25,7 @@ public class MastermindGame implements Parcelable {
         colorsArray = in.createStringArray();
         randomColorArray = in.createStringArray();
         difficulty = in.readString();
+        playerColorCombination = in.readString();
         nbrColorCombination = in.readInt();
         nbrAttempts = in.readInt();
     }
@@ -85,6 +87,14 @@ public class MastermindGame implements Parcelable {
         this.difficulty = difficulty;
     }
 
+    public String getPlayerColorCombination() {
+        return playerColorCombination;
+    }
+
+    public void setPlayerColorCombination(String playerColorCombination) {
+        this.playerColorCombination = playerColorCombination;
+    }
+
     public static final Creator<MastermindGame> CREATOR = new Creator<MastermindGame>() {
         @Override
         public MastermindGame createFromParcel(Parcel in) {
@@ -108,6 +118,7 @@ public class MastermindGame implements Parcelable {
         parcel.writeStringArray(colorsArray);
         parcel.writeStringArray(randomColorArray);
         parcel.writeString(difficulty);
+        parcel.writeString(playerColorCombination);
         parcel.writeInt(nbrColorCombination);
         parcel.writeInt(nbrAttempts);
     }

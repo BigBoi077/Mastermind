@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources name="spinnerIds">
+    <item name="spinner" type="id" format="string" />
+    <item name="spinner1" type="id" format="string" />
+    <item name="spinner2" type="id" format="string" />
+    <item name="spinner3" type="id" format="string" />
+    <item name="spinner4" type="id" format="string" />
+    <item name="spinner5" type="id" />
+</resources>
