@@ -17,11 +17,9 @@ import cegepst.example.mastermind.models.MastermindGame;
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder> {
 
     ResultContract.Presenter presenter;
-    private MastermindGame mastermindGame;
 
-    public ResultAdapter(ResultContract.Presenter presenter, MastermindGame mastermindGame) {
+    public ResultAdapter(ResultContract.Presenter presenter) {
         this.presenter = presenter;
-        this.mastermindGame = mastermindGame;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements ResultContract.ColorCombinationRow {
@@ -40,10 +38,6 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         public void setPlayerCombination(String text) {
             playerColorCombination.setText(text);
         }
-
-        public void createCircles() {
-
-        }
     }
 
     @NonNull
@@ -58,12 +52,11 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setPlayerCombination(mastermindGame.getPlayerColorCombination());
-        holder.createCircles();
+        presenter.onNewColorCombinationRow(holder, position);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return presenter.getNbrPlayerAttempts();
     }
 }

@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import cegepst.example.mastermind.R;
 import cegepst.example.mastermind.contracts.ResultContract;
-import cegepst.example.mastermind.models.MastermindGame;
 import cegepst.example.mastermind.presenters.ResultPresenter;
 
 public class ResultActivity extends AppCompatActivity implements ResultContract.View {
@@ -23,31 +23,26 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
     private ResultContract.Presenter presenter;
     private ResultAdapter resultAdapter;
 
-    private MastermindGame mastermindGame;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        if (getIntent().hasExtra("game")) {
-            mastermindGame = getIntent().getParcelableExtra("game");
-        }
+        String chosenDifficulty = getIntent().getStringExtra("difficulty");
 
-        presenter = new ResultPresenter(this, savedInstanceState);
+        presenter = new ResultPresenter(this, savedInstanceState, chosenDifficulty);
 
-        resultAdapter = new ResultAdapter(presenter, mastermindGame);
+        resultAdapter = new ResultAdapter(presenter);
 
         RecyclerView colorAttempts = findViewById(R.id.colorCombinationList);
         colorAttempts.setAdapter(resultAdapter);
         colorAttempts.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void returnToGame(View view) {
+    public void onStartAttempt(View view) {
         Intent gameActivity = new Intent(this, GameActivity.class);
-        gameActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivityIfNeeded(gameActivity, 0);
+        gameActivity.putExtra("nbrColorCombination", presenter.getNbrColorCombination());
+        startActivityForResult(gameActivity, REQUEST_CODE_ADD);
     }
 
     @Override
@@ -55,13 +50,12 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE_ADD && resultCode == RESULT_OK) {
-            if (!data.hasExtra("game")) {
+            if (!data.hasExtra("playerColorArray")) {
                 Toast.makeText(this, R.string.error_unexpected, Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            presenter.addColorCombination(data.getParcelableExtra("game"));
-            presenter.addCircles(data.getParcelableExtra("game"));
+            presenter.addColorCombination(data.getStringArrayExtra("playerColorArray"));
         }
     }
 
@@ -69,5 +63,19 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         presenter.saveState(outState);
+    }
+
+    @Override
+    public void onWinner() {
+        Intent intent = new Intent(this, VictoryActivity.class);
+        intent.putExtra("game", presenter.getNbrColorCombination());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onGameOver() {
+        Intent intent = new Intent(this, GameOverActivity.class);
+        intent.putExtra("game", presenter.getNbrColorCombination());
+        startActivity(intent);
     }
 }

@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
-        android:onClick="returnToGame"
+        android:onClick="onStartAttempt"
         android:backgroundTint="@color/colorPrimary"
         app:fabCustomSize="48dp"
         app:maxImageSize="36dp"

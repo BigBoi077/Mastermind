@@ -14,13 +14,12 @@ import cegepst.example.mastermind.models.MastermindGame;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MastermindGame mastermindGame;
+    private String chosenDifficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mastermindGame = new MastermindGame();
     }
 
     public void sendDifficulty(View view) {
@@ -29,17 +28,15 @@ public class MainActivity extends AppCompatActivity {
         View radioButton = radioGroup.findViewById(radioButtonID);
         int index = radioGroup.indexOfChild(radioButton);
         RadioButton chosenRadioButton = (RadioButton) radioGroup.getChildAt(index);
-        String selectedDifficulty = chosenRadioButton.getText().toString();
-        mastermindGame.setDifficulty(selectedDifficulty);
+        chosenDifficulty = chosenRadioButton.getText().toString();
     }
 
     public void startGame(View view) {
-        if (mastermindGame.getDifficulty().equals("")) {
+        if (chosenDifficulty == null) {
             Toast.makeText(this, R.string.select_difficulty_error, Toast.LENGTH_SHORT).show();
         } else {
-            Intent gameIntent = new Intent(this , GameActivity.class);
-            mastermindGame.setCombinationsByDifficulty();
-            gameIntent.putExtra("game", mastermindGame);
+            Intent gameIntent = new Intent(this , ResultActivity.class);
+            gameIntent.putExtra("difficulty", chosenDifficulty);
             startActivity(gameIntent);
         }
     }

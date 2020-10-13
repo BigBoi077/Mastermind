@@ -21,7 +21,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="sendResults"
+        android:onClick="onSendResults"
         android:text="@string/try_combination"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@color/colorAccentPale"

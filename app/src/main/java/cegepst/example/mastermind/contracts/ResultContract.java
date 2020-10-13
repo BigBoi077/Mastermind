@@ -7,7 +7,8 @@ import cegepst.example.mastermind.models.MastermindGame;
 
 public interface ResultContract {
     interface  View {
-
+        void onWinner();
+        void onGameOver();
     }
 
     interface Presenter {
@@ -15,8 +16,10 @@ public interface ResultContract {
 
         void saveState(Bundle outState);
 
-        void addColorCombination(Parcelable game);
-        void addCircles(Parcelable game);
+        void addColorCombination(String[] playerColorCombination);
+
+        int getNbrColorCombination();
+        int getNbrPlayerAttempts();
     }
 
     interface ColorCombinationRow {
