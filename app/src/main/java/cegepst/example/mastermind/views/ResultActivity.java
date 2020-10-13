@@ -13,24 +13,31 @@ import android.widget.Toast;
 
 import cegepst.example.mastermind.R;
 import cegepst.example.mastermind.contracts.ResultContract;
+import cegepst.example.mastermind.models.MastermindGame;
 import cegepst.example.mastermind.presenters.ResultPresenter;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultActivity extends AppCompatActivity implements ResultContract.View {
 
     public static int REQUEST_CODE_ADD = 1;
 
     private ResultContract.Presenter presenter;
-
     private ResultAdapter resultAdapter;
+
+    private MastermindGame mastermindGame;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
+        if (getIntent().hasExtra("game")) {
+            mastermindGame = getIntent().getParcelableExtra("game");
+        }
+
         presenter = new ResultPresenter(this, savedInstanceState);
 
-        resultAdapter = new ResultAdapter(presenter);
+        resultAdapter = new ResultAdapter(presenter, mastermindGame);
 
         RecyclerView colorAttempts = findViewById(R.id.colorCombinationList);
         colorAttempts.setAdapter(resultAdapter);
@@ -38,8 +45,9 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     public void returnToGame(View view) {
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivityForResult(intent, REQUEST_CODE_ADD);
+        Intent gameActivity = new Intent(this, GameActivity.class);
+        gameActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivityIfNeeded(gameActivity, 0);
     }
 
     @Override
@@ -47,7 +55,7 @@ public class ResultActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE_ADD && resultCode == RESULT_OK) {
-            if (!data.hasExtra("contact")) {
+            if (!data.hasExtra("game")) {
                 Toast.makeText(this, R.string.error_unexpected, Toast.LENGTH_SHORT).show();
                 return;
             }

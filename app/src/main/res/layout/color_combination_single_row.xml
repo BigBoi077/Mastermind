@@ -10,17 +10,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="0.7"
+        android:layout_weight="0.6"
         android:layout_margin="10dp"
         android:text="" />
 
     <FrameLayout
         android:id="@+id/correctAnswerCircle"
         android:layout_width="wrap_content"
-        android:layout_weight="0.3"
+        android:layout_weight="0.4"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" />
 
-    </FrameLayout>
 </LinearLayout>

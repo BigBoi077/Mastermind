@@ -12,11 +12,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import cegepst.example.mastermind.R;
+import cegepst.example.mastermind.contracts.ResultContract;
 import cegepst.example.mastermind.models.MastermindGame;
 import cegepst.example.mastermind.models.Random;
 
 public class GameActivity extends AppCompatActivity {
 
+    private static int REQUEST_CODE_ADD_COLOR = 1;
     private MastermindGame mastermindGame;
 
     @Override
@@ -28,6 +30,11 @@ public class GameActivity extends AppCompatActivity {
         mastermindGame.generateRandomColorArray();
         setContentView(R.layout.activity_game);
         placeSpinners();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
     }
 
     private void placeSpinners() {
@@ -75,15 +82,24 @@ public class GameActivity extends AppCompatActivity {
 
     public void sendResults(View view) {
         String[] playerColorArray = setColorCombination();
+
         if (isWinner(playerColorArray)) {
             Intent intent = new Intent(this, VictoryActivity.class);
+            intent.putExtra("game", mastermindGame);
             startActivity(intent);
         }
+
         mastermindGame.setNbrAttempts(mastermindGame.getNbrAttempts() + 1);
+
         if (mastermindGame.isMaxedAttempts()) {
             Intent intent = new Intent(this, GameOverActivity.class);
+            intent.putExtra("game", mastermindGame);
             startActivity(intent);
         }
+
+        Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra("game", mastermindGame);
+        startActivityForResult(intent, REQUEST_CODE_ADD_COLOR);
     }
 
     private boolean isWinner(String[] playerColorArray) {
