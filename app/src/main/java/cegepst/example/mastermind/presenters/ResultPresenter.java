@@ -1,20 +1,14 @@
 package cegepst.example.mastermind.presenters;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
-import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-import cegepst.example.mastermind.R;
 import cegepst.example.mastermind.contracts.ResultContract;
 import cegepst.example.mastermind.models.MastermindGame;
-import cegepst.example.mastermind.views.GameOverActivity;
 import cegepst.example.mastermind.views.ResultActivity;
-import cegepst.example.mastermind.views.VictoryActivity;
 
 public class ResultPresenter implements ResultContract.Presenter {
 
@@ -44,21 +38,26 @@ public class ResultPresenter implements ResultContract.Presenter {
 
     @Override
     public void onNewColorCombinationRow(ResultContract.ColorCombinationRow holder, int position) {
-        Log.d("HELLO", "IM HERE");
         holder.setPlayerCombination(mastermindGame.getPlayerColorCombination());
+        holder.addCircles(mastermindGame.getPlayerColorArray(), mastermindGame.getRandomColorArray());
     }
 
     @Override
     public void saveState(Bundle outState) {
-        return;
+        outState.putParcelable("mastermindGame", mastermindGame);
     }
 
     @Override
     public void addColorCombination(String[] playerColorCombination) {
+        ResultContract.View view = viewRef.get();
+
         mastermindGame.setPlayerColorCombination(makeString(playerColorCombination));
+        mastermindGame.setPlayerColorArray(playerColorCombination);
+
+        view.notifyAttemptAdd(mastermindGame.getNbrAttempts());
 
         if (isWinner(playerColorCombination)) {
-            if (viewRef.get() == null) {
+            if (view == null) {
                 return;
             }
             viewRef.get().onWinner();
@@ -67,7 +66,7 @@ public class ResultPresenter implements ResultContract.Presenter {
         mastermindGame.setNbrAttempts(mastermindGame.getNbrAttempts() + 1);
 
         if (mastermindGame.isMaxedAttempts()) {
-            if (viewRef.get() == null) {
+            if (view == null) {
                 return;
             }
             viewRef.get().onGameOver();
@@ -79,7 +78,7 @@ public class ResultPresenter implements ResultContract.Presenter {
         for (int i = 0; i < playerColorCombination.length; i++) {
             playerEntry += playerColorCombination[i];
         }
-        Log.d("HEYYYYY", playerEntry);
+        Log.d("Your entry : ", playerEntry);
         return playerEntry;
     }
 

@@ -10,16 +10,63 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="0.6"
+        android:layout_weight="0.4"
         android:layout_margin="10dp"
         android:text="" />
 
-    <FrameLayout
-        android:id="@+id/correctAnswerCircle"
-        android:layout_width="wrap_content"
-        android:layout_weight="0.4"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:layout_height="wrap_content" />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" >
+
+            <ImageView
+                android:id="@+id/circle1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" >
+
+            <ImageView
+                android:id="@+id/circle2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" >
+
+            <ImageView
+                android:id="@+id/circle3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" >
+
+            <ImageView
+                android:id="@+id/circle4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" >
+
+            <ImageView
+                android:id="@+id/circle5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
 
 </LinearLayout>

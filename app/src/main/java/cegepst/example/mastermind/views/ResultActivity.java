@@ -54,9 +54,7 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
                 Toast.makeText(this, R.string.error_unexpected, Toast.LENGTH_SHORT).show();
                 return;
             }
-            Log.d("HEYYYY", "HEYYYY");
             presenter.addColorCombination(data.getStringArrayExtra("playerColorArray"));
-            resultAdapter.notifyDataSetChanged();
         }
     }
 
@@ -64,6 +62,11 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         presenter.saveState(outState);
+    }
+
+    @Override
+    public void notifyAttemptAdd(int position) {
+        resultAdapter.notifyItemInserted(position);
     }
 
     @Override
