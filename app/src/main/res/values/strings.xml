@@ -11,6 +11,8 @@
     <string name="winner_message">Congratulation you\'ve won the Mastermind game! To start a new game press the button below.</string>
     <string name="try_combination">Try combination</string>
     <string name="error_unexpected">Error</string>
+    <string name="game_over">Game Over</string>
+    <string name="winner">Congratulations!</string>
     <string-array name="colors">
         <item>Black</item>
         <item>White</item>

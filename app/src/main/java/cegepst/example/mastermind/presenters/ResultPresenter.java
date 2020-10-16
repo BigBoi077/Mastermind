@@ -14,6 +14,7 @@ public class ResultPresenter implements ResultContract.Presenter {
 
     private WeakReference<ResultContract.View> viewRef;
     private MastermindGame mastermindGame;
+    private String combination;
 
     public ResultPresenter(ResultActivity view, Bundle savedInstanceState, String chosenDifficulty) {
         viewRef = new WeakReference<>((ResultContract.View) view);
@@ -28,6 +29,10 @@ public class ResultPresenter implements ResultContract.Presenter {
         }
     }
 
+    public int getNbrAttempts() {
+        return mastermindGame.getNbrAttempts();
+    }
+
     public int getNbrColorCombination() {
         return mastermindGame.getNbrColorCombination();
     }
@@ -38,9 +43,10 @@ public class ResultPresenter implements ResultContract.Presenter {
 
     @Override
     public void onNewColorCombinationRow(ResultContract.ColorCombinationRow holder, int position) {
-        holder.setPlayerCombination(mastermindGame.getPlayerColorCombination());
+        holder.setPlayerCombination(combination);
         holder.addCircles(mastermindGame.getPlayerColorArray(), mastermindGame.getRandomColorArray());
     }
+
 
     @Override
     public void saveState(Bundle outState) {
@@ -73,9 +79,16 @@ public class ResultPresenter implements ResultContract.Presenter {
         }
     }
 
+    @Override
+    public MastermindGame getMastermindGame() {
+        return mastermindGame;
+    }
+
     private String makeString(String[] playerColorCombination) {
         String playerEntry = "";
+        combination = "";
         for (int i = 0; i < playerColorCombination.length; i++) {
+            combination += " " + playerColorCombination[i];
             playerEntry += playerColorCombination[i];
         }
         Log.d("Your entry : ", playerEntry);

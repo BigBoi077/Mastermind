@@ -2,6 +2,8 @@ package cegepst.example.mastermind.contracts;
 
 import android.os.Bundle;
 
+import cegepst.example.mastermind.models.MastermindGame;
+
 public interface ResultContract {
     interface  View {
         void notifyAttemptAdd(int position);
@@ -16,6 +18,8 @@ public interface ResultContract {
 
         void addColorCombination(String[] playerColorCombination);
 
+        MastermindGame getMastermindGame();
+        int getNbrAttempts();
         int getNbrColorCombination();
         int getNbrPlayerAttempts();
     }

@@ -28,10 +28,24 @@
             android:background="@color/colorAccentPink"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/game_over"
+            android:textSize="16dp"
+            android:textColor="#ff1a1a" />
+
+        <TextView
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:textSize="16dp"
             android:text="@string/game_over_message"/>
+
+        <TextView
+            android:id="@+id/nbrTurnsTaken"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16dp" />
 
         <View
             android:layout_width="match_parent"

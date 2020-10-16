@@ -15,7 +15,7 @@ import cegepst.example.mastermind.R;
 public class GameActivity extends AppCompatActivity {
 
     private final String[] colorsArray = new String[]{"B", "W", "Y", "R", "BL", "G"};
-    private static int REQUEST_CODE_ADD_COLOR = 1;
+    private int[] colorIndexes;
     private int nbrColorCombination;
 
     @Override
@@ -23,6 +23,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         nbrColorCombination = getIntent().getIntExtra("nbrColorCombination", 4);
+        colorIndexes = getIntent().getIntArrayExtra("colorIndexes");
         placeSpinners();
     }
 
@@ -43,7 +44,8 @@ public class GameActivity extends AppCompatActivity {
 
             spinner.setLayoutParams(spinnerSize);
             spinner.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            spinner.setSelection(0);
+
+            spinner.setSelection(colorIndexes[i]);
 
             switch (i) {
                 case 0:
@@ -73,11 +75,20 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private int getColorIndex(String spinnerText) {
+        for (int i = 0; i < colorsArray.length; i++) {
+            if (spinnerText.equals(colorsArray[i])) {
+                return i;
+            }
+        }
+        return 2;
+    }
+
     public void onSendResults(View view) {
         String[] playerColorArray = setColorCombination();
-
         Intent intent = new Intent();
         intent.putExtra("playerColorArray", playerColorArray);
+        intent.putExtra("playerColorChoice", colorIndexes);
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -91,15 +102,20 @@ public class GameActivity extends AppCompatActivity {
         String[] playerColorArray = new String[nbrColorCombination];
 
         playerColorArray[0] = getSpinnerText(R.id.spinner1);
+        colorIndexes[0] = getColorIndex(getSpinnerText(R.id.spinner1));
 
         playerColorArray[1] = getSpinnerText(R.id.spinner);
+        colorIndexes[1] = getColorIndex(getSpinnerText(R.id.spinner));
 
         playerColorArray[2] =  getSpinnerText(R.id.spinner2);
+        colorIndexes[2] = getColorIndex(getSpinnerText(R.id.spinner2));
 
         playerColorArray[3] =  getSpinnerText(R.id.spinner3);
+        colorIndexes[3] = getColorIndex(getSpinnerText(R.id.spinner3));
 
         if (nbrColorCombination > 4) {
             playerColorArray[4] =  getSpinnerText(R.id.spinner4);
+            colorIndexes[4] = getColorIndex(getSpinnerText(R.id.spinner4));
         }
 
         return playerColorArray;
