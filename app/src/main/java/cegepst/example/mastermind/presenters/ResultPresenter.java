@@ -44,12 +44,13 @@ public class ResultPresenter implements ResultContract.Presenter {
 
     @Override
     public void onNewColorCombinationRow(ResultContract.ColorCombinationRow holder, int position) {
-        holder.setPlayerCombination("JOSHUA");
+        Log.d("HELLO", "IM HERE");
+        holder.setPlayerCombination(mastermindGame.getPlayerColorCombination());
     }
 
     @Override
     public void saveState(Bundle outState) {
-
+        return;
     }
 
     @Override

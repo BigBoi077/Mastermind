@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import cegepst.example.mastermind.R;
-import cegepst.example.mastermind.models.Random;
 
 public class GameActivity extends AppCompatActivity {
 

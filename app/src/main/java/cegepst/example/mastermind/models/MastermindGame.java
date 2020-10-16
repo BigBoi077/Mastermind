@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class MastermindGame implements Parcelable {
 
-    private int MAX_ATTEMPTS = 12;
+    private final static int MAX_ATTEMPTS = 12;
     private String[] colorsArray;
     private String[] randomColorArray;
     private String difficulty;
@@ -21,7 +21,6 @@ public class MastermindGame implements Parcelable {
     }
 
     protected MastermindGame(Parcel in) {
-        MAX_ATTEMPTS = in.readInt();
         colorsArray = in.createStringArray();
         randomColorArray = in.createStringArray();
         difficulty = in.readString();
@@ -114,7 +113,6 @@ public class MastermindGame implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(MAX_ATTEMPTS);
         parcel.writeStringArray(colorsArray);
         parcel.writeStringArray(randomColorArray);
         parcel.writeString(difficulty);

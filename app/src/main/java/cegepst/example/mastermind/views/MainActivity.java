@@ -10,7 +10,6 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import cegepst.example.mastermind.R;
-import cegepst.example.mastermind.models.MastermindGame;
 
 public class MainActivity extends AppCompatActivity {
 

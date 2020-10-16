@@ -1,6 +1,7 @@
 package cegepst.example.mastermind.views;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,13 +30,14 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
-
+            Log.d("HELLO", "IM HERE");
             playerColorCombination = itemView.findViewById(R.id.playerColorCombination);
             circles = itemView.findViewById(R.id.correctAnswerCircle);
         }
 
         @Override
         public void setPlayerCombination(String text) {
+            Log.d("HELLO", "IM HERE");
             playerColorCombination.setText(text);
         }
     }
@@ -43,6 +45,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
     @NonNull
     @Override
     public ResultAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d("HELLO", "IM HERE");
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View singleContactView = inflater.inflate(R.layout.color_combination_single_row, parent, false);
@@ -52,6 +55,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Log.d("HELLO", "IM HERE");
         presenter.onNewColorCombinationRow(holder, position);
     }
 

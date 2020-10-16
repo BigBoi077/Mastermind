@@ -54,8 +54,9 @@ public class ResultActivity extends AppCompatActivity implements ResultContract.
                 Toast.makeText(this, R.string.error_unexpected, Toast.LENGTH_SHORT).show();
                 return;
             }
-
+            Log.d("HEYYYY", "HEYYYY");
             presenter.addColorCombination(data.getStringArrayExtra("playerColorArray"));
+            resultAdapter.notifyDataSetChanged();
         }
     }
 
